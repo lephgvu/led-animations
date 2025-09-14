@@ -110,36 +110,36 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // Bật LED đỏ, tắt LED vàng
-	      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+	// Bật LED đỏ, tắt LED vàng
+	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
  800015c:	2201      	movs	r2, #1
  800015e:	2120      	movs	r1, #32
  8000160:	480d      	ldr	r0, [pc, #52]	; (8000198 <main+0x4c>)
  8000162:	f000 fbf9 	bl	8000958 <HAL_GPIO_WritePin>
-	      HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_RESET);
  8000166:	2200      	movs	r2, #0
  8000168:	2140      	movs	r1, #64	; 0x40
  800016a:	480b      	ldr	r0, [pc, #44]	; (8000198 <main+0x4c>)
  800016c:	f000 fbf4 	bl	8000958 <HAL_GPIO_WritePin>
-	      HAL_Delay(2000); // 2 giây
+	HAL_Delay(2000); // 2 giây
  8000170:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
  8000174:	f000 f96e 	bl	8000454 <HAL_Delay>
 
-	      // Tắt LED đỏ, bật LED vàng
-	      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
+	// Tắt LED đỏ, bật LED vàng
+	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
  8000178:	2200      	movs	r2, #0
  800017a:	2120      	movs	r1, #32
  800017c:	4806      	ldr	r0, [pc, #24]	; (8000198 <main+0x4c>)
  800017e:	f000 fbeb 	bl	8000958 <HAL_GPIO_WritePin>
-	      HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_SET);
  8000182:	2201      	movs	r2, #1
  8000184:	2140      	movs	r1, #64	; 0x40
  8000186:	4804      	ldr	r0, [pc, #16]	; (8000198 <main+0x4c>)
  8000188:	f000 fbe6 	bl	8000958 <HAL_GPIO_WritePin>
-	      HAL_Delay(2000); // 2 giây
+	HAL_Delay(2000); // 2 giây
  800018c:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
  8000190:	f000 f960 	bl	8000454 <HAL_Delay>
-	      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
  8000194:	e7e2      	b.n	800015c <main+0x10>
  8000196:	bf00      	nop
  8000198:	40010800 	.word	0x40010800
