@@ -1,0 +1,24 @@
+# Eclipse/STM32CubeIDE metadata and settings
+.metadata/
+*.launch
+*.log
+
+# Build output folders
+Debug/
+Release/
+*.o
+*.elf
+*.map
+*.bin
+*.hex
+*.list
+
+# STM32/Proteus backup files
+*.pdsbak
+*.bak
+*.pdsprj~
+Backup Of *
+
+# OS-specific files
+.DS_Store
+Thumbs.db
