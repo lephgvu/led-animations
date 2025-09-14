@@ -1,0 +1,48 @@
+# =======================
+# STM32CubeIDE / Eclipse
+# =======================
+
+# Eclipse workspace metadata (không cần thiết cho repo)
+.metadata/
+.settings/
+.cproject
+.project
+
+# Log files
+*.log
+
+# Launch configurations (có thể khác nhau trên từng máy)
+*.launch
+
+# =======================
+# Build output
+# =======================
+
+# Các thư mục build của CubeIDE
+Debug/
+Release/
+
+# Các file object / build trung gian
+*.o
+*.d
+*.su
+*.map
+
+# Các file binary xuất ra
+*.elf
+*.bin
+*.hex
+*.list
+
+# =======================
+# Proteus / STM32 backup
+# =======================
+*.pdsbak
+*.pdsprj~
+Backup Of *
+
+# =======================
+# OS-specific
+# =======================
+.DS_Store
+Thumbs.db
