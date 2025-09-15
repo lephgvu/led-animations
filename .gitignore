@@ -2,7 +2,7 @@
 # STM32CubeIDE / Eclipse
 # =======================
 
-# Eclipse workspace metadata (không cần thiết cho repo)
+# Eclipse workspace metadata
 .metadata/
 .settings/
 .cproject
@@ -11,7 +11,7 @@
 # Log files
 *.log
 
-# Launch configurations (có thể khác nhau trên từng máy)
+# Launch configurations
 *.launch
 *.workspace
 
