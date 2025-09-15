@@ -6,4 +6,4 @@ From the simulation on Proteus, one more LED is connected to pin PA6 of the STM3
 
 In this exercise, the status of two LEDs are switched every 2 seconds, as demonstrated in the figure bellow.
 
-<img width="500" height="200" alt="Ex1img" src="https://github.com/user-attachments/assets/dabe5649-9e5c-4cd3-adbf-30a0f90097f2" />
+<img width="450" height="200" alt="Ex1img" src="https://github.com/user-attachments/assets/dabe5649-9e5c-4cd3-adbf-30a0f90097f2" />
