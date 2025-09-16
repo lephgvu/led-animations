@@ -1,107 +1,93 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2025 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+#define LED_ON 0
+#define LED_OFF 1
+#define RED_TIME 5
+#define YELLOW_TIME 2
+#define GREEN_TIME 3
 
-/* USER CODE END Includes */
+typedef enum {
+	RED,
+	YELLOW,
+	GREEN
+} trafficLightState;
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	HAL_Init();
+	SystemClock_Config();
+    MX_GPIO_Init();
 
-  /* USER CODE END 1 */
+  	trafficLightState status1 = RED; int counter1 = RED_TIME;
+  	trafficLightState status2 = GREEN; int counter2 = GREEN_TIME;
 
-  /* MCU Configuration--------------------------------------------------------*/
+  	while (1) {
+  		if (status1 == RED) {
+  			HAL_GPIO_WritePin(LED_RED_WAY1_GPIO_Port, LED_RED_WAY1_Pin, LED_ON);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY1_GPIO_Port, LED_YELLOW_WAY1_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY1_GPIO_Port, LED_GREEN_WAY1_Pin, LED_OFF);
+  			counter1--;
+  			if (counter1 == 0) {
+  				status1 = GREEN;
+  				counter1 = GREEN_TIME;
+  			}
+  		}
+  		else if (status1 == GREEN) {
+  			HAL_GPIO_WritePin(LED_RED_WAY1_GPIO_Port, LED_RED_WAY1_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY1_GPIO_Port, LED_YELLOW_WAY1_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY1_GPIO_Port, LED_GREEN_WAY1_Pin, LED_ON);
+  			counter1--;
+  			if (counter1 == 0) {
+  				status1 = YELLOW;
+  				counter1 = YELLOW_TIME;
+  			}
+  		}
+  		else if (status1 == YELLOW) {
+  			HAL_GPIO_WritePin(LED_RED_WAY1_GPIO_Port, LED_RED_WAY1_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY1_GPIO_Port, LED_YELLOW_WAY1_Pin, LED_ON);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY1_GPIO_Port, LED_GREEN_WAY1_Pin, LED_OFF);
+  			counter1--;
+  			if (counter1 == 0) {
+  				status1 = RED;
+  				counter1 = RED_TIME;
+  			}
+  		}
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  /* USER CODE BEGIN 2 */
-
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-	  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
-	  HAL_Delay(1000);
-	  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(1000);
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
+  		if (status2 == RED) {
+  			HAL_GPIO_WritePin(LED_RED_WAY2_GPIO_Port, LED_RED_WAY2_Pin, LED_ON);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY2_GPIO_Port, LED_YELLOW_WAY2_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY2_GPIO_Port, LED_GREEN_WAY2_Pin, LED_OFF);
+  			counter2--;
+  			if (counter2 == 0) {
+  				status2 = GREEN;
+  				counter2 = GREEN_TIME;
+  			}
+  		}
+  		else if (status2 == GREEN) {
+  			HAL_GPIO_WritePin(LED_RED_WAY2_GPIO_Port, LED_RED_WAY2_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY2_GPIO_Port, LED_YELLOW_WAY2_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY2_GPIO_Port, LED_GREEN_WAY2_Pin, LED_ON);
+  			counter2--;
+  			if (counter2 == 0) {
+  				status2 = YELLOW;
+  				counter2 = YELLOW_TIME;
+  			}
+  		}
+  		else if (status2 == YELLOW) {
+  			HAL_GPIO_WritePin(LED_RED_WAY2_GPIO_Port, LED_RED_WAY2_Pin, LED_OFF);
+  			HAL_GPIO_WritePin(LED_YELLOW_WAY2_GPIO_Port, LED_YELLOW_WAY2_Pin, LED_ON);
+  			HAL_GPIO_WritePin(LED_GREEN_WAY2_GPIO_Port, LED_GREEN_WAY2_Pin, LED_OFF);
+  			counter2--;
+  			if (counter2 == 0) {
+  				status2 = RED;
+  				counter2 = RED_TIME;
+  			}
+  		}
+  		HAL_Delay(1000);
+  	}
 }
 
 /**
@@ -152,14 +138,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED_WAY1_Pin|LED_YELLOW_WAY1_Pin|LED_GREEN_WAY1_Pin|LED_RED_WAY2_Pin
+                          |LED_YELLOW_WAY2_Pin|LED_GREEN_WAY2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_RED_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin;
+  /*Configure GPIO pins : LED_RED_WAY1_Pin LED_YELLOW_WAY1_Pin LED_GREEN_WAY1_Pin LED_RED_WAY2_Pin
+                           LED_YELLOW_WAY2_Pin LED_GREEN_WAY2_Pin */
+  GPIO_InitStruct.Pin = LED_RED_WAY1_Pin|LED_YELLOW_WAY1_Pin|LED_GREEN_WAY1_Pin|LED_RED_WAY2_Pin
+                          |LED_YELLOW_WAY2_Pin|LED_GREEN_WAY2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_RED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 
