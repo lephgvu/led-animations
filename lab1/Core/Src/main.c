@@ -1,45 +1,21 @@
 #include "main.h"
 
-#define LED_ON   GPIO_PIN_SET
-#define LED_OFF  GPIO_PIN_RESET
-
 typedef enum{
 	RED,
 	YELLOW,
 	GREEN
-} TrafficLightState;
+} State;
 
 #define RED_TIME 5
 #define YELLOW_TIME 2
 #define GREEN_TIME 3
-
-// Func: Set Traffic Light State
-static void setTrafficLight(TrafficLightState state) {
-    // Mặc định tắt hết
-    HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, LED_OFF);
-    HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, LED_OFF);
-    HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, LED_OFF);
-
-    // Bật đúng đèn theo state
-    switch (state) {
-        case RED:
-            HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, LED_ON);
-            break;
-        case YELLOW:
-            HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, LED_ON);
-            break;
-        case GREEN:
-            HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, LED_ON);
-            break;
-    }
-}
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
 int main(void)
 {
-  TrafficLightState state = RED;
+  State lightState = RED;
   int counter = RED_TIME;
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -56,27 +32,43 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  setTrafficLight(state);
-  HAL_Delay(1000);
-  counter--;
-
-  if (counter <= 0)
-  {
-      switch (state) {
-          case RED:
-              state = GREEN;
-              counter = GREEN_TIME;
-              break;
-          case GREEN:
-              state = YELLOW;
-              counter = YELLOW_TIME;
-              break;
-          case YELLOW:
-              state = RED;
-              counter = RED_TIME;
-              break;
-      }
-  }
+	  if (lightState == RED)
+	  {
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+		  --counter;
+		  if (counter == 0)
+		  {
+			  lightState = YELLOW;
+			  counter = YELLOW_TIME;
+		  }
+	  }
+	  else if (lightState == YELLOW)
+	  {
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+		  --counter;
+		  if (counter == 0)
+		  {
+		  	  lightState = GREEN;
+		  	  counter = GREEN_TIME;
+		  }
+	  }
+	  else if (lightState == GREEN)
+	  {
+	  	  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+	  	  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+	  	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+	  	  --counter;
+	  	  if (counter == 0)
+	  	  {
+	  	      lightState = RED;
+	  		  counter = RED_TIME;
+	  	  }
+	  }
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
