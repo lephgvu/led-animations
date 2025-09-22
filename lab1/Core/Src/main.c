@@ -57,6 +57,45 @@ void setNumberOnClock(int num) {
 	}
 }
 
+void clearNumberOnClock(int num) {
+	if (num == 0) {
+		HAL_GPIO_WritePin(LED_RED_12_GPIO_Port, LED_RED_12_Pin, SET);
+	}
+	else if (num == 1) {
+		HAL_GPIO_WritePin(LED_RED_1_GPIO_Port, LED_RED_1_Pin, SET);
+	}
+	else if (num == 2) {
+		HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, SET);
+	}
+	else if (num == 3) {
+		HAL_GPIO_WritePin(LED_RED_3_GPIO_Port, LED_RED_3_Pin, SET);
+	}
+	else if (num == 4) {
+		HAL_GPIO_WritePin(LED_RED_4_GPIO_Port, LED_RED_4_Pin, SET);
+	}
+	else if (num == 5) {
+		HAL_GPIO_WritePin(LED_RED_5_GPIO_Port, LED_RED_5_Pin, SET);
+	}
+	else if (num == 6) {
+		HAL_GPIO_WritePin(LED_RED_6_GPIO_Port, LED_RED_6_Pin, SET);
+	}
+	else if (num == 7) {
+		HAL_GPIO_WritePin(LED_RED_7_GPIO_Port, LED_RED_7_Pin, SET);
+	}
+	else if (num == 8) {
+		HAL_GPIO_WritePin(LED_RED_8_GPIO_Port, LED_RED_8_Pin, SET);
+	}
+	else if (num == 9) {
+		HAL_GPIO_WritePin(LED_RED_9_GPIO_Port, LED_RED_9_Pin, SET);
+	}
+	else if (num == 10) {
+		HAL_GPIO_WritePin(LED_RED_10_GPIO_Port, LED_RED_10_Pin, SET);
+	}
+	else if (num == 11) {
+		HAL_GPIO_WritePin(LED_RED_11_GPIO_Port, LED_RED_11_Pin, SET);
+	}
+}
+
 int main(void)
 {
   HAL_Init();
@@ -64,16 +103,23 @@ int main(void)
   MX_GPIO_Init();
 
   clearAllClock();
-  int counter = 11;
 
   while (1)
   {
-	  if (counter < 0) {
-		  clearAllClock();
-		  counter = 11;
+	  for (int count = 0; count <= 11; count++){
+	  	  setNumberOnClock(count);
+	  	  HAL_Delay(500);
 	  }
-	  setNumberOnClock(counter);
-	  counter--;
+	  clearNumberOnClock(5);
+	  HAL_Delay(1000);
+
+	  clearNumberOnClock(1);
+	  HAL_Delay(1000);
+
+	  clearNumberOnClock(0);
+	  HAL_Delay(1000);
+
+	  clearAllClock();
 	  HAL_Delay(1000);
   }
 }
