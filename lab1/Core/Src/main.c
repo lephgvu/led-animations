@@ -3,6 +3,21 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
+void clearAllClock() {
+	HAL_GPIO_WritePin(LED_RED_1_GPIO_Port, LED_RED_1_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_3_GPIO_Port, LED_RED_3_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_4_GPIO_Port, LED_RED_4_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_5_GPIO_Port, LED_RED_5_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_6_GPIO_Port, LED_RED_6_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_7_GPIO_Port, LED_RED_7_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_8_GPIO_Port, LED_RED_8_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_9_GPIO_Port, LED_RED_9_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_10_GPIO_Port, LED_RED_10_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_11_GPIO_Port, LED_RED_11_Pin, SET);
+	HAL_GPIO_WritePin(LED_RED_12_GPIO_Port, LED_RED_12_Pin, SET);
+}
+
 int main(void)
 {
   HAL_Init();
@@ -11,6 +26,7 @@ int main(void)
 
   while (1)
   {
+	/**
 	for (int i = 1; i <= 12; i++)
 	 {
 	 // Tắt tất cả các LED
@@ -21,6 +37,8 @@ int main(void)
 
 	 HAL_Delay(1000);
 	 }
+	 **/
+	  HAL_Delay(1000);
   }
 }
 
