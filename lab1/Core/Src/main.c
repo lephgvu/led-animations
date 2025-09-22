@@ -103,24 +103,27 @@ int main(void)
   MX_GPIO_Init();
 
   clearAllClock();
+  int second = 0, minute = 0, hour = 0;
 
   while (1)
   {
-	  for (int count = 0; count <= 11; count++){
-	  	  setNumberOnClock(count);
-	  	  HAL_Delay(500);
-	  }
-	  clearNumberOnClock(5);
-	  HAL_Delay(1000);
-
-	  clearNumberOnClock(1);
-	  HAL_Delay(1000);
-
-	  clearNumberOnClock(0);
-	  HAL_Delay(1000);
-
 	  clearAllClock();
-	  HAL_Delay(1000);
+	  setNumberOnClock(hour);
+	  setNumberOnClock(minute/5);
+	  setNumberOnClock(second/5);
+	  second++;
+	  if (second == 60){
+	  	second = 0;
+	  	minute++;
+	  }
+	  if (minute == 60){
+	  	minute = 0;
+	  	hour++;
+	  }
+	  if (hour == 12){
+	  	hour = 0;
+	  }
+	  HAL_Delay(10);
   }
 }
 
