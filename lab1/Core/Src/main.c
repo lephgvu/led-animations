@@ -18,26 +18,62 @@ void clearAllClock() {
 	HAL_GPIO_WritePin(LED_RED_12_GPIO_Port, LED_RED_12_Pin, SET);
 }
 
+void setNumberOnClock(int num) {
+	if (num == 0) {
+		HAL_GPIO_WritePin(LED_RED_12_GPIO_Port, LED_RED_12_Pin, RESET);
+	}
+	else if (num == 1) {
+		HAL_GPIO_WritePin(LED_RED_1_GPIO_Port, LED_RED_1_Pin, RESET);
+	}
+	else if (num == 2) {
+		HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, RESET);
+	}
+	else if (num == 3) {
+		HAL_GPIO_WritePin(LED_RED_3_GPIO_Port, LED_RED_3_Pin, RESET);
+	}
+	else if (num == 4) {
+		HAL_GPIO_WritePin(LED_RED_4_GPIO_Port, LED_RED_4_Pin, RESET);
+	}
+	else if (num == 5) {
+		HAL_GPIO_WritePin(LED_RED_5_GPIO_Port, LED_RED_5_Pin, RESET);
+	}
+	else if (num == 6) {
+		HAL_GPIO_WritePin(LED_RED_6_GPIO_Port, LED_RED_6_Pin, RESET);
+	}
+	else if (num == 7) {
+		HAL_GPIO_WritePin(LED_RED_7_GPIO_Port, LED_RED_7_Pin, RESET);
+	}
+	else if (num == 8) {
+		HAL_GPIO_WritePin(LED_RED_8_GPIO_Port, LED_RED_8_Pin, RESET);
+	}
+	else if (num == 9) {
+		HAL_GPIO_WritePin(LED_RED_9_GPIO_Port, LED_RED_9_Pin, RESET);
+	}
+	else if (num == 10) {
+		HAL_GPIO_WritePin(LED_RED_10_GPIO_Port, LED_RED_10_Pin, RESET);
+	}
+	else if (num == 11) {
+		HAL_GPIO_WritePin(LED_RED_11_GPIO_Port, LED_RED_11_Pin, RESET);
+	}
+}
+
 int main(void)
 {
   HAL_Init();
   SystemClock_Config();
   MX_GPIO_Init();
 
+  clearAllClock();
+  int counter = 11;
+
   while (1)
   {
-	/**
-	for (int i = 1; i <= 12; i++)
-	 {
-	 // Tắt tất cả các LED
-	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_All, GPIO_PIN_SET);
-
-	 // Bật LED đang được duyệt
-	 HAL_GPIO_WritePin(GPIOA, (1 << i), GPIO_PIN_RESET);
-
-	 HAL_Delay(1000);
-	 }
-	 **/
+	  if (counter < 0) {
+		  clearAllClock();
+		  counter = 11;
+	  }
+	  setNumberOnClock(counter);
+	  counter--;
 	  HAL_Delay(1000);
   }
 }
