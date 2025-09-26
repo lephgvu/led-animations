@@ -106,11 +106,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
  8000158:	f000 f85c 	bl	8000214 <MX_GPIO_Init>
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  // LED_RED ON, LED_YELLOW OFF
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
  800015c:	2201      	movs	r2, #1
  800015e:	2120      	movs	r1, #32
@@ -125,7 +125,6 @@ int main(void)
  8000170:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
  8000174:	f000 f96e 	bl	8000454 <HAL_Delay>
 
-  // LED_RED OFF, LED_YELLOW ON
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
  8000178:	2200      	movs	r2, #0
  800017a:	2120      	movs	r1, #32
